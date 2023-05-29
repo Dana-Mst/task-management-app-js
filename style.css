@@ -1,0 +1,59 @@
+#container{
+    display:flex;
+    justify-content: space-between;
+    
+}
+
+#not_started{
+    background-color: rgb(228, 188, 94);
+    display: inline-block;
+}
+#progress{
+    background-color: turquoise;
+}
+
+#blocked{
+    background-color: rgb(159, 65, 65);
+}
+
+#finished{
+    background-color: rgb(55, 174, 134);
+    display: inline-block;
+}
+.not_started {
+    border-color: rgb(213, 163, 55) ;
+
+}
+
+.progress {
+    border-color: rgb(39, 131, 122) ;
+
+}
+
+.blocked{
+    border-color: rgb(140, 98, 98);
+
+}
+.finished{
+    border-color: rgb(34, 106, 99) ;
+
+}
+
+.task {
+    border-width: 2px;
+    border-style:  solid;
+    padding: 10px;
+    margin: 20px;
+    color: antiquewhite;
+}
+
+.task p {
+    margin: 0px;
+}
+#middle-container {
+    display: inline-grid;
+    
+}
+.pile {
+    margin: 0px 10px;
+}
