@@ -60,6 +60,9 @@ function onLoad() {
     for(let task of taskList) {
         addTask(task);
     }
+    showForm();
+
+
 
 
 }
@@ -79,6 +82,51 @@ function addTask(task){
     pileDiv.append(taskDiv);
 
 }
+
+function showForm() {
+    let formContainer = document.getElementById("form-container");
+    let titleInput = document.createElement("input");
+    titleInput.setAttribute("id", "form-title");
+    titleInput.setAttribute("type", "text");
+    titleInput.setAttribute("value", "Title");
+    titleInput.classList.add("form-input");
+    formContainer.appendChild(titleInput);
+
+    let descriptionInput = document.createElement("input");
+    descriptionInput.setAttribute("id", "form-description");
+    descriptionInput.setAttribute("type", "text");
+    descriptionInput.setAttribute("value", "Description");  
+    descriptionInput.classList.add("form-input");
+    formContainer.appendChild(descriptionInput);
+
+    let assigneesInput = document.createElement("input");
+    assigneesInput.setAttribute("id", "form-assignees");
+    assigneesInput.setAttribute("type", "text");
+    assigneesInput.setAttribute("value", "Assignee");
+    assigneesInput.classList.add("form-input");
+    formContainer.appendChild(assigneesInput);
+
+    let addButton = document.createElement("button");
+    addButton.innerHTML = "Add";
+    addButton.setAttribute("type", "submit");
+    addButton.setAttribute("id", "add-btn");
+    formContainer.appendChild(addButton);
+
+
+    
+}
+
+
+
+
+
+{/* <div id="task-form-container">
+<input type="text" id="task-title" value="Title">
+<input type=" text" id="task-description" value="Description">  
+<input type="text" id="task-assignees" value="Assignee">
+<button type="submit">Add</button>
+</div> */}
+
 
 {/* <div id="not_started">
 <div class="task not_started">

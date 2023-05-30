@@ -57,3 +57,25 @@
 .pile {
     margin: 0px 10px;
 }
+
+#form-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    border: 20px solid whitesmoke;
+}
+
+#add-btn {
+    background-color: rgb(64, 81, 55);
+    color: white;
+    padding: 5px 20px;
+}
+.form-input {
+    padding: 5px 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+
+
+
