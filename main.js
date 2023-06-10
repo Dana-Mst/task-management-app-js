@@ -57,6 +57,13 @@ let taskList = [
 
 let assignees = ["Ioana", "Maria", "Sebastian", "Julian", "Uhtred"];
 
+let stateTransitionMap = {
+  "not_started":["progress", "blocked"],
+  "progress":["not_started", "blocked", "finished"],
+  "blocked":["progress"],
+  "finished":[]
+}
+
 document.addEventListener("DOMContentLoaded", onLoad);
 
 function onLoad() {
@@ -175,26 +182,23 @@ function dropTask(event) {
   event.preventDefault();
   let taskId = event.dataTransfer.getData("task-id");
   let taskDiv = document.getElementById(taskId);
-  let taskState = event.dataTransfer.getData("task-state");
+  let oldTaskState = event.dataTransfer.getData("task-state");
   let pileDiv = event.currentTarget;
+  let newTaskState = pileDiv.id;
 
-  if (
-    (taskState === "not_started" && pileDiv.id === "progress" || "blocked") ||
-    pileDiv.id === "blocked" ||  (taskState === "progress" &&
-      (pileDiv.id === "not_started" || pileDiv.id === "finished")) ||
-    (taskState === "blocked" && pileDiv === "progress")
-  ) {
-    if (taskState === "blocked") {
-      console.log("ask user input for reason");
-    }
-    changeStateOfDroppedTask(taskDiv, taskState, pileDiv, taskId);
+
+  if(canChangePile(oldTaskState, newTaskState)) {
+    changeStateOfDroppedTask(taskDiv, oldTaskState, pileDiv, taskId);
     pileDiv.appendChild(taskDiv);
-  } else {
-    console.log(
-      `not allowed to move a task with status ${taskState} to ${pileDiv.id} pile`
-    );
   }
+
 }
+
+function canChangePile(oldTaskState, newTaskState) {
+  return stateTransitionMap[oldTaskState].includes(newTaskState);
+}
+
+
 function changeStateOfDroppedTask(taskDiv, taskState, pileDiv, taskId) {
   taskDiv.classList.remove(taskState);
   taskDiv.classList.add(pileDiv.id);
