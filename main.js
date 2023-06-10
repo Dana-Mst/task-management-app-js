@@ -178,6 +178,24 @@ function dropTask(event) {
   let taskState = event.dataTransfer.getData("task-state");
   let pileDiv = event.currentTarget;
 
+  if (
+    (taskState === "not_started" && pileDiv.id === "progress" || "blocked") ||
+    pileDiv.id === "blocked" ||  (taskState === "progress" &&
+      (pileDiv.id === "not_started" || pileDiv.id === "finished")) ||
+    (taskState === "blocked" && pileDiv === "progress")
+  ) {
+    if (taskState === "blocked") {
+      console.log("ask user input for reason");
+    }
+    changeStateOfDroppedTask(taskDiv, taskState, pileDiv, taskId);
+    pileDiv.appendChild(taskDiv);
+  } else {
+    console.log(
+      `not allowed to move a task with status ${taskState} to ${pileDiv.id} pile`
+    );
+  }
+}
+function changeStateOfDroppedTask(taskDiv, taskState, pileDiv, taskId) {
   taskDiv.classList.remove(taskState);
   taskDiv.classList.add(pileDiv.id);
 
@@ -186,8 +204,6 @@ function dropTask(event) {
       task.state = pileDiv.id;
     }
   }
-
-  pileDiv.appendChild(taskDiv);
 }
 
 function clearInputValue(event) {
@@ -206,4 +222,3 @@ function makeid(length) {
   }
   return result;
 }
-
